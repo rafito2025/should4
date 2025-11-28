@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Should - Negative Sentences</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounce 1s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .structure-title {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5em;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .diagram {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .flow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .pronouns {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pronoun {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+        }
+
+        .pronoun:hover {
+            transform: translateX(5px) scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.5);
+        }
+
+        .box {
+            padding: 20px 35px;
+            border-radius: 15px;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .box:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-box {
+            background: linear-gradient(135deg, #5c7cfa, #4c6ef5);
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            font-size: 0.7em;
+            display: block;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .verb-box {
+            background: linear-gradient(135deg, #ff8c42, #ff6b35);
+        }
+
+        .complement-box {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+
+        .plus-sign {
+            font-size: 2.5em;
+            color: #e74c3c;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .example-section {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .example-sentence {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .example-word {
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .example-word:hover {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: #e74c3c;
+            animation: bounce-arrow 1s infinite;
+        }
+
+        @keyframes bounce-arrow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        .labels {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .label {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            font-weight: bold;
+            color: white;
+            font-size: 1.1em;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .label:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .example-button {
+            display: block;
+            margin: 30px auto 0;
+            padding: 18px 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .example-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(231, 76, 60, 0.6);
+        }
+
+        .example-button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .pronoun.active {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            animation: fadeInCard 0.5s ease;
+        }
+
+        .example-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .example-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .example-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes fadeInCard {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .example-card:nth-child(2) {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        }
+
+        .example-card:nth-child(3) {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+        }
+
+        .example-card:nth-child(4) {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+        }
+
+        .example-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
+        }
+
+        .example-english {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .example-card:nth-child(3) .example-english,
+        .example-card:nth-child(4) .example-english {
+            color: white;
+        }
+
+        .example-spanish {
+            font-size: 1.2em;
+            color: #34495e;
+            font-style: italic;
+            margin-top: 10px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .example-card:nth-child(3) .example-spanish,
+        .example-card:nth-child(4) .example-spanish {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Image Modal Styles */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1002;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .image-modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-modal-content {
+            background: white;
+            border-radius: 25px;
+            max-width: 900px;
+            width: 90%;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.5s ease;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .image-container {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .example-image {
+            width: 100%;
+            max-width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: zoomIn 0.5s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .text-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .image-modal-title {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .image-modal-english {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .image-modal-spanish {
+            font-size: 1.4em;
+            color: #34495e;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+
+        .close-image-modal {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+            width: 100%;
+        }
+
+        .close-image-modal:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(231, 76, 60, 0.6);
+        }
+
+        .close-image-modal:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .example-card {
+            cursor: pointer;
+        }
+
+        .close-modal {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .close-modal:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(231, 76, 60, 0.6);
+        }
+
+        .close-modal:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .highlight-word {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* Verb Modal Styles */
+        .verb-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .verb-modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .verb-modal-content {
+            background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.5s ease;
+        }
+
+        .verb-modal-header {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .verb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .verb-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verb-item::before {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 3em;
+            color: #2ecc71;
+            transition: all 0.3s ease;
+        }
+
+        .verb-item:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .verb-item:active::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .verb-item:nth-child(1) {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            animation: popIn 0.5s ease 0.1s backwards;
+        }
+
+        .verb-item:nth-child(2) {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            animation: popIn 0.5s ease 0.2s backwards;
+        }
+
+        .verb-item:nth-child(3) {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            color: white;
+            animation: popIn 0.5s ease 0.3s backwards;
+        }
+
+        .verb-item:nth-child(4) {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            animation: popIn 0.5s ease 0.4s backwards;
+        }
+
+        .verb-item:nth-child(5) {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            color: #2c3e50;
+            animation: popIn 0.5s ease 0.5s backwards;
+        }
+
+        .verb-item:nth-child(6) {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            animation: popIn 0.5s ease 0.6s backwards;
+        }
+
+        .verb-item:nth-child(7) {
+            background: linear-gradient(135deg, #55efc4, #00b894);
+            color: white;
+            animation: popIn 0.5s ease 0.7s backwards;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .close-verb-modal {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(44, 62, 80, 0.4);
+        }
+
+        .close-verb-modal:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(44, 62, 80, 0.6);
+        }
+
+        .close-verb-modal:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .box {
+                font-size: 1.1em;
+                padding: 15px 25px;
+            }
+
+            .example-word {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SHOULD</h1>
+            <h2>NEGATIVE SENTENCES</h2>
+        </div>
+
+        <div class="structure-title">
+            GRAMATICAL STRUCTURE
+        </div>
+
+        <div class="diagram">
+            <div class="flow-container">
+                <div class="pronouns">
+                    <div class="pronoun" onclick="selectPronoun(this, 'I')">I</div>
+                    <div class="pronoun" onclick="selectPronoun(this, 'YOU')">YOU</div>
+                    <div class="pronoun" onclick="selectPronoun(this, 'HE')">HE</div>
+                    <div class="pronoun" onclick="selectPronoun(this, 'SHE')">SHE</div>
+                    <div class="pronoun" onclick="selectPronoun(this, 'IT')">IT</div>
+                    <div class="pronoun" onclick="selectPronoun(this, 'WE')">WE</div>
+                    <div class="pronoun" onclick="selectPronoun(this, 'YOU')">YOU</div>
+                    <div class="pronoun" onclick="selectPronoun(this, 'THEY')">THEY</div>
+                </div>
+
+                <div class="plus-sign">+</div>
+                <div class="box modal-box">
+                    SHOULD NOT
+                    <span class="modal-subtitle">(SHOULDN'T)</span>
+                </div>
+                <div class="plus-sign">+</div>
+                <div class="box verb-box" onclick="showVerbModal()">VERB BASE</div>
+                <div class="plus-sign">+</div>
+                <div class="box complement-box">COMPLEMENT</div>
+            </div>
+        </div>
+
+        <div class="example-section">
+            <div class="example-sentence">
+                <div class="example-word" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);" id="pronounDisplay">I</div>
+                <div class="example-word" style="background: linear-gradient(135deg, #5c7cfa, #4c6ef5);">SHOULDN'T</div>
+                <div class="example-word" style="background: linear-gradient(135deg, #ff8c42, #ff6b35);">WORK</div>
+                <div class="example-word" style="background: linear-gradient(135deg, #95a5a6, #7f8c8d);">TOO MUCH</div>
+            </div>
+
+            <div class="arrow">⬇</div>
+
+            <div class="labels">
+                <div class="label">PRONOUN</div>
+                <div class="label">VERB MODAL</div>
+                <div class="label">VERB BASE</div>
+                <div class="label">COMPLEMENT</div>
+            </div>
+        </div>
+
+        <button class="example-button" onclick="showAlert()">Example</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="exampleModal">
+        <div class="modal-content">
+            <h2 class="modal-header">📚 Examples - Ejemplos</h2>
+            
+            <div class="example-card" onclick="showImageModal(1)">
+                <span class="example-number">1</span>
+                <div class="example-english">
+                    You <span class="highlight-word">shouldn't</span> eat junk food.
+                </div>
+                <div class="example-spanish">
+                    No deberías comer comida chatarra.
+                </div>
+            </div>
+
+            <div class="example-card" onclick="showImageModal(2)">
+                <span class="example-number">2</span>
+                <div class="example-english">
+                    He <span class="highlight-word">shouldn't</span> drive so fast.
+                </div>
+                <div class="example-spanish">
+                    Él no debería conducir tan rápido.
+                </div>
+            </div>
+
+            <div class="example-card" onclick="showImageModal(3)">
+                <span class="example-number">3</span>
+                <div class="example-english">
+                    They <span class="highlight-word">shouldn't</span> stay up late.
+                </div>
+                <div class="example-spanish">
+                    Ellos no deberían quedarse despiertos hasta tarde.
+                </div>
+            </div>
+
+            <button class="close-modal" onclick="closeModal()">Close / Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Verb Base Modal -->
+    <div class="verb-modal" id="verbModal">
+        <div class="verb-modal-content">
+            <h2 class="verb-modal-header">📖 Base Verbs</h2>
+            
+            <div class="verb-grid">
+                <div class="verb-item">go</div>
+                <div class="verb-item">eat</div>
+                <div class="verb-item">run</div>
+                <div class="verb-item">read</div>
+                <div class="verb-item">write</div>
+                <div class="verb-item">clean</div>
+                <div class="verb-item">study</div>
+            </div>
+
+            <button class="close-verb-modal" onclick="closeVerbModal()">Close / Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-content">
+            <div class="image-container">
+                <img id="exampleImage" src="" alt="Example" class="example-image">
+            </div>
+            <div class="text-container">
+                <h3 class="image-modal-title">Example</h3>
+                <div class="image-modal-english" id="imageModalEnglish"></div>
+                <div class="image-modal-spanish" id="imageModalSpanish"></div>
+                <button class="close-image-modal" onclick="closeImageModal()">Close / Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPronoun = 'I';
+
+        function selectPronoun(element, pronoun) {
+            // Remove active class from all pronouns
+            document.querySelectorAll('.pronoun').forEach(p => {
+                p.classList.remove('active');
+            });
+            
+            // Add active class to selected pronoun
+            element.classList.add('active');
+            
+            // Update the example
+            currentPronoun = pronoun;
+            document.getElementById('pronounDisplay').textContent = pronoun;
+            
+            // Add animation
+            const pronounDisplay = document.getElementById('pronounDisplay');
+            pronounDisplay.style.animation = 'none';
+            setTimeout(() => {
+                pronounDisplay.style.animation = 'bounce 0.5s ease';
+            }, 10);
+        }
+
+        function showAlert() {
+            const modal = document.getElementById('exampleModal');
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('exampleModal');
+            modal.classList.remove('show');
+        }
+
+        function showVerbModal() {
+            const modal = document.getElementById('verbModal');
+            modal.classList.add('show');
+        }
+
+        function closeVerbModal() {
+            const modal = document.getElementById('verbModal');
+            modal.classList.remove('show');
+        }
+
+        function showImageModal(exampleNumber) {
+            const imageModal = document.getElementById('imageModal');
+            const image = document.getElementById('exampleImage');
+            const englishText = document.getElementById('imageModalEnglish');
+            const spanishText = document.getElementById('imageModalSpanish');
+
+            // Define examples with images
+            const examples = {
+                1: {
+                    image: './chatarra.jpg',
+                    english: "You shouldn't eat junk food.",
+                    spanish: "No deberías comer comida chatarra."
+                },
+                2: {
+                    image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=500&h=500&fit=crop',
+                    english: "He shouldn't drive so fast.",
+                    spanish: "Él no debería conducir tan rápido."
+                },
+                3: {
+                    image: './desvelo.jpg',
+                    english: "They shouldn't stay up late.",
+                    spanish: "Ellos no deberían quedarse despiertos hasta tarde."
+                }
+            };
+
+            const example = examples[exampleNumber];
+            image.src = example.image;
+            englishText.innerHTML = example.english.replace('shouldn\'t', '<span class="highlight-word">shouldn\'t</span>');
+            spanishText.textContent = example.spanish;
+
+            imageModal.classList.add('show');
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const exampleModal = document.getElementById('exampleModal');
+            const verbModal = document.getElementById('verbModal');
+            const imageModal = document.getElementById('imageModal');
+            
+            if (event.target === exampleModal) {
+                exampleModal.classList.remove('show');
+            }
+            if (event.target === verbModal) {
+                verbModal.classList.remove('show');
+            }
+            if (event.target === imageModal) {
+                imageModal.classList.remove('show');
+            }
+        }
+
+        // Add initial animation to pronouns
+        document.querySelectorAll('.pronoun').forEach((pronoun, index) => {
+            pronoun.style.animation = `fadeIn 0.5s ease ${index * 0.1}s backwards`;
+        });
+    </script>
+</body>
+</html>
